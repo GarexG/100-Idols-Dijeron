@@ -1,0 +1,323 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>100 Idols Dijeron</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- FONDO TEMÁTICO -->
+<div class="stage-background" aria-hidden="true">
+
+    <div class="stage-spotlight spotlight-one"></div>
+    <div class="stage-spotlight spotlight-two"></div>
+    <div class="stage-spotlight spotlight-three"></div>
+    <div class="stage-spotlight spotlight-four"></div>
+
+    <div class="stage-ring ring-one"></div>
+    <div class="stage-ring ring-two"></div>
+
+    <div id="stage-sparkles"></div>
+
+</div>
+
+
+    <!-- PANTALLA DE INICIO -->
+    <section id="start-screen" class="screen active">
+
+        <div class="start-container">
+
+            <h1 class="game-logo">
+                <img
+                    src="assets/images/logo.png"
+                    alt="100 Idols Dijeron - Idolly Project"
+                >
+            </h1>
+
+            <p class="subtitle">
+                ¡Adivina las respuestas más populares!
+            </p>
+
+            <button id="start-btn" class="primary-btn">
+                Comenzar juego
+            </button>
+
+            <button id="continue-btn" class="secondary-btn" hidden>
+                Continuar partida
+            </button>
+
+        </div>
+
+    </section>
+
+    <!-- CONFIGURACIÓN DE EQUIPOS -->
+    <section id="setup-screen" class="screen">
+
+        <div class="setup-container">
+            <span class="setup-brand">
+                ✦ IDOLLY PROJECT ✦
+            </span>
+            <h2>¡Presentemos a los equipos!</h2>
+
+            <p>Introduce el nombre de cada equipo</p>
+
+            <div class="teams-setup">
+
+                <div class="team-input team-one">
+                    <span class="team-symbol">🎤</span>
+                    <label for="team1-name">Equipo 1</label>
+
+                    <input
+                        type="text"
+                        id="team1-name"
+                        placeholder="Nombre del equipo"
+                        maxlength="25"
+                        autocomplete="off"
+                    >
+                </div>
+
+                <div class="setup-versus">VS</div>
+
+                <div class="team-input team-two">
+                    <span class="team-symbol">⭐</span>
+                    <label for="team2-name">Equipo 2</label>
+
+                    <input
+                        type="text"
+                        id="team2-name"
+                        placeholder="Nombre del equipo"
+                        maxlength="25"
+                        autocomplete="off"
+                    >
+                </div>
+
+            </div>
+
+            <div class="setup-actions">
+
+                <button id="back-btn" class="secondary-btn">
+                    Regresar
+                </button>
+
+                <button id="play-btn" class="primary-btn">
+                    ¡A jugar!
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    
+<!-- TABLERO PRINCIPAL -->
+<section id="game-screen" class="screen">
+
+    <div class="game-container">
+
+        <!-- ENCABEZADO -->
+        <header class="game-header">
+
+            <span class="brand">✦ IDOLLY PROJECT ✦</span>
+
+            <h1>100 IDOLS DIJERON</h1>
+
+            <div class="round-info">
+
+                <span id="round-number">Ronda 1</span>
+
+                <span id="round-multiplier">×1</span>
+
+            </div>
+
+        </header>
+
+        <!-- MARCADORES -->
+        <div class="scoreboard">
+
+            <div class="score-card team-one">
+
+                <span id="team1-display">Equipo 1</span>
+
+                <strong id="team1-score">0</strong>
+
+            </div>
+
+            <div class="round-score-card">
+
+                <span>PUNTOS EN JUEGO</span>
+
+                <strong id="round-score">0</strong>
+
+            </div>
+
+            <div class="score-card team-two">
+
+                <span id="team2-display">Equipo 2</span>
+
+                <strong id="team2-score">0</strong>
+
+            </div>
+
+        </div>
+
+        <!-- TABLERO DE RESPUESTAS -->
+        <div class="board-container">
+
+            <div id="answers-board"></div>
+
+        </div>
+
+        <!-- ERRORES -->
+        <div class="strikes-container">
+
+            <div class="strike">✕</div>
+            <div class="strike">✕</div>
+            <div class="strike">✕</div>
+
+        </div>
+
+        <!-- CONTROLES DEL CONDUCTOR -->
+        <div class="game-controls">
+
+            <button id="award-team1-btn" class="control-btn award-one">
+                Puntos al equipo 1
+            </button>
+
+            <button id="strike-btn" class="control-btn error-btn">
+                ✕ Error
+            </button>
+
+            <button id="undo-strike-btn" class="control-btn">
+                Quitar error
+            </button>
+
+            <button id="award-team2-btn" class="control-btn award-two">
+                Puntos al equipo 2
+            </button>
+
+            <button id="next-round-btn" class="control-btn next-btn" disabled>
+                Siguiente ronda →
+            </button>
+
+            <div class="audio-controls">
+
+            <div class="audio-title">
+                ♫ CONTROL DE AUDIO
+            </div>
+
+            <div class="audio-control">
+
+                <label for="music-volume">🎵 Música</label>
+
+                <input
+                    type="range"
+                    id="music-volume"
+                    min="0"
+                    max="100"
+                    value="15"
+                >
+
+                <span id="music-volume-value">15%</span>
+
+            </div>
+
+            <div class="audio-control">
+
+                <label for="sfx-volume">🔔 Efectos</label>
+
+                <input
+                    type="range"
+                    id="sfx-volume"
+                    min="0"
+                    max="100"
+                    value="70"
+                >
+
+                <span id="sfx-volume-value">70%</span>
+
+            </div>
+
+            <button id="mute-btn" class="mute-btn">
+                🔊 Silenciar audio (M)
+            </button>
+
+</div>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+<!-- PANTALLA DE RESULTADOS -->
+<section id="results-screen" class="screen">
+
+    <div class="results-container">
+
+        <span class="brand">
+            ✦ IDOLLY PROJECT ✦
+        </span>
+
+        <h1 class="results-title">
+            ¡Tenemos un ganador!
+        </h1>
+
+        <div id="winner-trophy">🏆</div>
+
+        <h2 id="winner-name">
+            Equipo ganador
+        </h2>
+
+        <div class="final-scoreboard">
+
+            <div id="final-team1-card" class="final-score-card team-one">
+
+                <span id="final-team1-name">Equipo 1</span>
+
+                <strong id="final-team1-score">0</strong>
+
+                <span class="points-label">PUNTOS</span>
+
+            </div>
+
+            <div class="versus">VS</div>
+
+            <div id="final-team2-card" class="final-score-card team-two">
+
+                <span id="final-team2-name">Equipo 2</span>
+
+                <strong id="final-team2-score">0</strong>
+
+                <span class="points-label">PUNTOS</span>
+
+            </div>
+
+        </div>
+
+        <button id="home-btn" class="primary-btn">
+            Volver al inicio
+        </button>
+
+    </div>
+
+</section>
+
+<div id="confetti-container"></div>
+
+
+    <!-- ANIMACIÓN DE ERROR -->
+    <div id="error-overlay">
+        <span>✕</span>
+    </div>
+
+    <script src="questions.js"></script>
+    <script src="audio.js"></script>
+    <script src="game.js"></script>
+
+</body>
+</html>
